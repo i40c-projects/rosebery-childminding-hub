@@ -209,6 +209,33 @@
     animation: fade-up 700ms var(--transition-smooth) both;
   }
 
+  .warm-card {
+    background: #FFFDFA;
+    border: 1px solid rgba(122, 31, 77, 0.06);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 18px 40px -22px rgba(122, 31, 77, 0.18),
+      0 4px 12px -6px rgba(122, 31, 77, 0.06);
+  }
+
+  .soft-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(122, 31, 77, 0.12), transparent);
+  }
+
+  .pill-eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-berry/70 ring-1 ring-berry/10;
+  }
+
+  @keyframes float-soft {
+    0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+    50% { transform: translateY(-6px) rotate(var(--r, 0deg)); }
+  }
+
+  .animate-float-soft {
+    animation: float-soft 7s ease-in-out infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-float,
     .animate-fade-up,
