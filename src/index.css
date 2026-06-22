@@ -275,7 +275,7 @@
       radial-gradient(circle at 73% 23%, rgba(230, 90, 122, 0.28), transparent 25rem),
       radial-gradient(circle at 88% 68%, rgba(169, 216, 245, 0.34), transparent 28rem),
       radial-gradient(circle at 42% 88%, rgba(167, 199, 163, 0.28), transparent 25rem),
-      linear-gradient(100deg, rgba(255,250,242,0.96) 0%, rgba(247,229,211,0.78) 47%, rgba(248,215,215,0.48) 100%);
+      linear-gradient(100deg, rgba(255,250,242,0.88) 0%, rgba(247,229,211,0.66) 47%, rgba(248,215,215,0.30) 100%);
     animation: aurora-breathe 12s ease-in-out infinite alternate;
   }
 
@@ -291,8 +291,8 @@
 
   .hero-video-wash {
     background:
-      linear-gradient(90deg, rgba(255,249,241,0.97) 0%, rgba(255,249,241,0.83) 45%, rgba(255,236,229,0.42) 100%),
-      linear-gradient(180deg, rgba(255,255,255,0.20), rgba(230,90,122,0.12));
+      linear-gradient(90deg, rgba(255,249,241,0.90) 0%, rgba(255,249,241,0.68) 45%, rgba(255,236,229,0.24) 100%),
+      linear-gradient(180deg, rgba(255,255,255,0.10), rgba(230,90,122,0.10));
   }
 
   .atmosphere-video {
@@ -467,7 +467,8 @@
     }
 
     .cinematic-video {
-      display: none;
+      animation: none;
+      transform: scale(1.08);
     }
   }
 }

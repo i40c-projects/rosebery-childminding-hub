@@ -79,16 +79,16 @@ export function HomePage() {
 function Hero() {
   return (
     <section className="hero-stage relative isolate min-h-[calc(100svh-68px)] overflow-hidden">
-      <video className="cinematic-video hero-background-video absolute inset-0 -z-30 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+      <video className="cinematic-video hero-background-video absolute inset-0 z-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
         <source src={cinematicVideos.hero} type="video/mp4" />
       </video>
-      <div className="hero-video-wash absolute inset-0 -z-20" />
-      <div className="hero-aurora absolute inset-0 -z-20" />
-      <div className="absolute left-[5%] top-[12%] -z-10 h-40 w-40 rounded-full bg-rose/15 blur-3xl" />
-      <div className="absolute bottom-[8%] right-[42%] -z-10 h-48 w-48 rounded-full bg-sky/25 blur-3xl" />
-      <p className="ghost-text absolute -left-4 top-[10%] -z-10 whitespace-nowrap opacity-70">PLAY LEARN GROW</p>
+      <div className="hero-video-wash absolute inset-0 z-[1]" />
+      <div className="hero-aurora absolute inset-0 z-[2]" />
+      <div className="absolute left-[5%] top-[12%] z-[3] h-40 w-40 rounded-full bg-rose/15 blur-3xl" />
+      <div className="absolute bottom-[8%] right-[42%] z-[3] h-48 w-48 rounded-full bg-sky/25 blur-3xl" />
+      <p className="ghost-text absolute -left-4 top-[10%] z-[3] whitespace-nowrap opacity-70">PLAY LEARN GROW</p>
 
-      <div className="mx-auto grid min-h-[calc(100svh-68px)] max-w-[1480px] items-center gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[0.88fr_1.12fr] lg:gap-6 lg:px-10 lg:py-12">
+      <div className="relative z-10 mx-auto grid min-h-[calc(100svh-68px)] max-w-[1480px] items-center gap-10 px-4 py-10 sm:px-6 md:grid-cols-[0.92fr_1.08fr] md:gap-2 md:px-8 lg:grid-cols-[0.88fr_1.12fr] lg:gap-6 lg:px-10 lg:py-12">
         <div className="relative z-20 max-w-2xl animate-fade-up">
           <span className="liquid-glass inline-flex rounded-full px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-berry sm:text-xs">
             Rosebery Childminding Hub
@@ -142,7 +142,7 @@ function Hero() {
 
 function ClassroomScene() {
   return (
-    <div className="relative z-10 mx-auto aspect-[1/1.06] w-full max-w-[760px] animate-fade-up lg:max-w-none">
+    <div className="relative z-10 mx-auto aspect-[1/1.06] w-full max-w-[760px] animate-fade-up md:max-w-none">
       <div className="classroom-shell absolute inset-[4%] overflow-hidden rounded-[42px] sm:rounded-[58px]">
         <svg viewBox="0 0 760 800" className="h-full w-full" role="img" aria-label="Illustrated bright Rosebery learning room">
           <defs>
@@ -239,16 +239,16 @@ function ClassroomScene() {
 function DayAtRosebery() {
   return (
     <section className="day-journey relative isolate overflow-hidden py-24 md:py-32">
-      <video className="cinematic-video atmosphere-video absolute inset-0 -z-20 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+      <video className="cinematic-video atmosphere-video absolute inset-0 z-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
         <source src={cinematicVideos.atmosphere} type="video/mp4" />
       </video>
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(255,249,241,.92),rgba(245,234,220,.86))]" />
-      <div className="absolute left-[4%] top-20 h-16 w-28 rounded-full bg-white/65 blur-[1px] before:absolute before:-top-6 before:left-5 before:h-14 before:w-14 before:rounded-full before:bg-white/65 after:absolute after:-top-4 after:right-5 after:h-12 after:w-12 after:rounded-full after:bg-white/65" />
-      <div className="absolute right-[8%] top-36 h-12 w-24 rounded-full bg-white/55 before:absolute before:-top-5 before:left-4 before:h-10 before:w-10 before:rounded-full before:bg-white/55" />
-      <Send className="paper-plane absolute left-[8%] top-[27%] h-8 w-8 rotate-12 text-rose/70 md:h-11 md:w-11" />
-      <Sparkles className="float-star absolute right-[12%] top-[22%] h-7 w-7 text-[#d5a838]" />
+      <div className="absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(255,249,241,.86),rgba(245,234,220,.80))]" />
+      <div className="absolute left-[4%] top-20 z-[2] h-16 w-28 rounded-full bg-white/65 blur-[1px] before:absolute before:-top-6 before:left-5 before:h-14 before:w-14 before:rounded-full before:bg-white/65 after:absolute after:-top-4 after:right-5 after:h-12 after:w-12 after:rounded-full after:bg-white/65" />
+      <div className="absolute right-[8%] top-36 z-[2] h-12 w-24 rounded-full bg-white/55 before:absolute before:-top-5 before:left-4 before:h-10 before:w-10 before:rounded-full before:bg-white/55" />
+      <Send className="paper-plane absolute left-[8%] top-[27%] z-[3] h-8 w-8 rotate-12 text-rose/70 md:h-11 md:w-11" />
+      <Sparkles className="float-star absolute right-[12%] top-[22%] z-[3] h-7 w-7 text-[#d5a838]" />
 
-      <div className="relative mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
         <SectionHeading eyebrow="A day at Rosebery" title="Every little moment becomes part of their story" copy="A familiar, reassuring rhythm with room for discovery, friendships, rest and plenty of joy." />
 
         <div className="mt-14 flex gap-5 overflow-x-auto pb-8 pt-3 scrollbar-thin lg:grid lg:grid-cols-7 lg:overflow-visible">
@@ -376,17 +376,17 @@ function DashboardCanvas({ mode }: { mode: typeof portalCards[number]['mode'] })
 function FinalCta() {
   return (
     <section className="sunset-cta relative isolate min-h-[76vh] overflow-hidden py-24 md:py-32">
-      <video className="cinematic-video final-background-video absolute inset-0 -z-30 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+      <video className="cinematic-video final-background-video absolute inset-0 z-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
         <source src={cinematicVideos.final} type="video/mp4" />
       </video>
-      <div className="final-video-wash absolute inset-0 -z-20" />
-      <div className="absolute bottom-[-10rem] left-1/2 -z-10 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-[#ffe7a7] blur-3xl" />
-      <div className="absolute bottom-0 left-0 right-0 -z-10 h-[32%] bg-gradient-to-t from-berry/55 to-transparent" />
-      <Send className="paper-plane absolute left-[12%] top-[20%] h-10 w-10 -rotate-12 text-white/75" />
-      <Star className="float-star absolute right-[15%] top-[16%] h-8 w-8 fill-[#ffe7a7] text-[#ffe7a7]" />
-      <Sparkles className="float-star absolute bottom-[25%] left-[20%] h-7 w-7 text-white/70" style={{ animationDelay: '1.2s' }} />
+      <div className="final-video-wash absolute inset-0 z-[1]" />
+      <div className="absolute bottom-[-10rem] left-1/2 z-[2] h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-[#ffe7a7] blur-3xl" />
+      <div className="absolute bottom-0 left-0 right-0 z-[2] h-[32%] bg-gradient-to-t from-berry/55 to-transparent" />
+      <Send className="paper-plane absolute left-[12%] top-[20%] z-[3] h-10 w-10 -rotate-12 text-white/75" />
+      <Star className="float-star absolute right-[15%] top-[16%] z-[3] h-8 w-8 fill-[#ffe7a7] text-[#ffe7a7]" />
+      <Sparkles className="float-star absolute bottom-[25%] left-[20%] z-[3] h-7 w-7 text-white/70" style={{ animationDelay: '1.2s' }} />
 
-      <div className="mx-auto flex min-h-[52vh] max-w-5xl items-center justify-center px-4 text-center sm:px-6">
+      <div className="relative z-10 mx-auto flex min-h-[52vh] max-w-5xl items-center justify-center px-4 text-center sm:px-6">
         <div className="liquid-glass rounded-[36px] px-5 py-12 text-white sm:rounded-[48px] sm:px-12 md:px-20 md:py-16">
           <span className="inline-flex rounded-full border border-white/35 bg-white/15 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em]">Your Rosebery journey starts here</span>
           <h2 className="mt-6 font-display text-[clamp(3.5rem,9vw,8rem)] uppercase leading-[0.88]">Ready to Begin With Rosebery?</h2>
