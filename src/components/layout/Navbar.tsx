@@ -21,10 +21,10 @@ export function Navbar() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/45 bg-cream/72 backdrop-blur-2xl shadow-sm shadow-berry/5">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
+    <header className="liquid-glass sticky top-0 z-40 rounded-none border-x-0 border-t-0 bg-cream/62 shadow-[0_12px_38px_rgba(122,31,77,0.08)]">
+      <nav className="mx-auto flex max-w-[1480px] items-center justify-between px-4 py-3.5 sm:px-6 lg:px-10">
         <Link to="/" className="group flex items-center gap-3 text-berry transition-smooth hover:text-rose">
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl gradient-rose text-white shadow-lg shadow-rose/20">
+          <span className="flex h-10 w-10 items-center justify-center rounded-[14px] gradient-rose text-white shadow-lg shadow-rose/20 ring-1 ring-white/60">
             <span className="font-display text-lg">R</span>
           </span>
           <span className="font-display text-2xl tracking-wider">Rosebery</span>
@@ -66,7 +66,7 @@ export function Navbar() {
       </nav>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-white/40 bg-cream/86 px-4 py-4 space-y-2 backdrop-blur-2xl">
+        <div className="lg:hidden space-y-2 border-t border-white/55 bg-cream/82 px-4 py-4 backdrop-blur-2xl">
           {navLinks.map((link) => (
             <Link
               key={link.to}

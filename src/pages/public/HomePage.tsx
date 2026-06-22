@@ -1,759 +1,286 @@
 import { Link } from 'react-router-dom';
 import {
-  Bell, BookOpen, CalendarCheck, Check, CreditCard, FileText,
-  Heart, MessageSquare, Play, Shield, Sparkles, Star, Sun,
-  Users, Utensils, Moon, Apple, Blocks, Palette, Home as HomeIcon,
+  ArrowRight,
+  BarChart3,
+  Bell,
+  BookOpen,
+  CalendarCheck,
+  Check,
+  CreditCard,
+  Heart,
+  MessageCircle,
+  Palette,
+  Play,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Sun,
+  Users,
+  Utensils,
+  MoonStar,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
-/* ============================================================
-   ROSEBERY HOMEPAGE
-   Tone: warm, safe, trusted, modern, Scandi-Montessori.
-   Palette: cream + warm beige + sage + sky, berry/rose used sparingly.
-   ============================================================ */
+const trustPoints = [
+  { icon: ShieldCheck, label: 'Safe Spaces' },
+  { icon: Users, label: 'Small Groups' },
+  { icon: Bell, label: 'Parent Updates' },
+  { icon: Heart, label: 'Community Values' },
+];
+
+const dayStages = [
+  { time: '8:00', title: 'Arrival', icon: Sun, copy: 'A familiar face, a gentle hello and time to settle.' },
+  { time: '8:30', title: 'Breakfast', icon: Utensils, copy: 'A warm start with good food and happy conversation.' },
+  { time: '10:00', title: 'Story Time', icon: BookOpen, copy: 'Big imaginations grow through stories, rhythm and language.' },
+  { time: '11:00', title: 'Creative Play', icon: Palette, copy: 'Painting, building and discovering at every child\'s pace.' },
+  { time: '12:30', title: 'Lunch', icon: Heart, copy: 'A calm shared meal, made part of the daily rhythm.' },
+  { time: '13:30', title: 'Quiet Time', icon: MoonStar, copy: 'Soft spaces for rest, comfort and a gentle reset.' },
+  { time: '17:00', title: 'Home Time', icon: Send, copy: 'A happy handover with clear updates for parents.' },
+];
+
+const showcaseCards = [
+  { title: 'Story Time', tag: 'Language & wonder', caption: 'Stories that turn a quiet corner into a whole new world.', scene: 'story', tone: 'rose' },
+  { title: 'Creative Learning', tag: 'Make & discover', caption: 'Open-ended materials for little ideas with big potential.', scene: 'creative', tone: 'sky' },
+  { title: 'Healthy Meals', tag: 'Happy routines', caption: 'Colourful, balanced moments shared around the table.', scene: 'meal', tone: 'sage' },
+  { title: 'Small Group Care', tag: 'Known & supported', caption: 'The space and attention every child needs to feel secure.', scene: 'blocks', tone: 'berry' },
+  { title: 'Parent Updates', tag: 'Always connected', caption: 'Meaningful updates that keep families close to the day.', scene: 'updates', tone: 'sun' },
+  { title: 'Quiet Spaces', tag: 'Rest & comfort', caption: 'A softer pace for children who need a peaceful moment.', scene: 'quiet', tone: 'lavender' },
+] as const;
+
+const portalCards = [
+  { title: 'Parent Portal', label: 'Your child\'s day, beautifully clear', icon: Heart, mode: 'parent' },
+  { title: 'Childminder Portal', label: 'Care records without the paperwork burden', icon: Users, mode: 'care' },
+  { title: 'Admin Dashboard', label: 'One calm view across the whole hub', icon: BarChart3, mode: 'admin' },
+  { title: 'Finance Dashboard', label: 'Invoices, payments and clarity in one place', icon: CreditCard, mode: 'finance' },
+] as const;
 
 export function HomePage() {
   return (
-    <>
+    <div className="public-texture overflow-hidden bg-[#fff9f1]">
       <Hero />
-      <TrustStrip />
       <DayAtRosebery />
       <InsideRosebery />
-      <MeetChildminders />
-      <ParentPortal />
-      <Testimonials />
-      <WhyParents />
+      <DigitalHub />
       <FinalCta />
-    </>
-  );
-}
-
-/* -------------------- shared bits -------------------- */
-
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return <span className="pill-eyebrow">{children}</span>;
-}
-
-function SectionHead({
-  eyebrow,
-  title,
-  intro,
-  align = 'center',
-}: {
-  eyebrow: string;
-  title: string;
-  intro?: string;
-  align?: 'left' | 'center';
-}) {
-  return (
-    <div className={`max-w-3xl ${align === 'center' ? 'mx-auto text-center' : ''}`}>
-      <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="mt-4 font-display text-4xl uppercase leading-[1.02] text-berry md:text-5xl">
-        {title}
-      </h2>
-      {intro && (
-        <p className="mt-5 text-base leading-relaxed text-berry/70 md:text-lg">{intro}</p>
-      )}
     </div>
   );
 }
 
-/* -------------------- HERO -------------------- */
-
 function Hero() {
-  const proof = ['Safe environment', 'Small groups', 'Daily updates', 'Community values'];
   return (
-    <section className="relative overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#FFFBF4_0%,#FBF3E6_100%)]" />
-        <div className="absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full bg-sage/15 blur-3xl" />
-        <div className="absolute -left-32 bottom-0 h-[360px] w-[360px] rounded-full bg-sky/20 blur-3xl" />
-      </div>
+    <section className="hero-stage relative isolate min-h-[calc(100svh-68px)] overflow-hidden">
+      <div className="hero-aurora absolute inset-0 -z-20" />
+      <div className="absolute left-[5%] top-[12%] -z-10 h-40 w-40 rounded-full bg-rose/15 blur-3xl" />
+      <div className="absolute bottom-[8%] right-[42%] -z-10 h-48 w-48 rounded-full bg-sky/25 blur-3xl" />
+      <p className="ghost-text absolute -left-4 top-[10%] -z-10 whitespace-nowrap opacity-70">PLAY LEARN GROW</p>
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.85fr_1fr] lg:gap-16 lg:px-8 lg:py-28">
-        {/* LEFT */}
-        <div>
-          <Eyebrow>Rosebery Childminding Hub</Eyebrow>
-          <h1 className="mt-5 font-display text-[2.6rem] uppercase leading-[1.02] text-berry sm:text-5xl md:text-[3.6rem] lg:text-[4rem]">
-            Helping children flourish through care, play &amp; discovery.
+      <div className="mx-auto grid min-h-[calc(100svh-68px)] max-w-[1480px] items-center gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[0.88fr_1.12fr] lg:gap-6 lg:px-10 lg:py-12">
+        <div className="relative z-20 max-w-2xl animate-fade-up">
+          <span className="liquid-glass inline-flex rounded-full px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-berry sm:text-xs">
+            Rosebery Childminding Hub
+          </span>
+          <h1 className="mt-6 max-w-[760px] font-display text-[clamp(3.25rem,7.2vw,7.5rem)] uppercase leading-[0.89] text-berry">
+            Helping Children <span className="text-gradient-rose">Flourish</span> Through Care, Play &amp; Discovery
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-berry/72">
-            Warm, facility-based childminding in Liverpool — supporting families through trusted
-            independent childminders and community values.
+          <p className="mt-6 max-w-xl text-base leading-7 text-berry/72 sm:text-lg sm:leading-8">
+            Rosebery is a facility-based childminding hub operating under Liverpool Muslim Society,
+            supporting families through trusted independent childminders, warm spaces and community values.
           </p>
 
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link to="/register-interest">
-              <Button size="lg">Register Your Child</Button>
+              <Button size="lg" className="hero-cta w-full sm:w-auto">
+                Register Your Child <ArrowRight className="h-4 w-4" />
+              </Button>
             </Link>
             <Link to="/become-a-childminder">
-              <Button variant="secondary" size="lg">
+              <Button variant="secondary" size="lg" className="liquid-glass w-full border-white/70 bg-white/45 sm:w-auto">
                 Become a Childminder
               </Button>
             </Link>
           </div>
 
-          <ul className="mt-8 grid max-w-xl gap-x-6 gap-y-3 sm:grid-cols-2">
-            {proof.map((item) => (
-              <li key={item} className="flex items-center gap-3 text-sm font-medium text-berry/80">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sage/25 text-sage-700">
-                  <Check className="h-3.5 w-3.5" strokeWidth={3} style={{ color: '#5C7E58' }} />
+          <div className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {trustPoints.map(({ icon: Icon, label }, index) => (
+              <div
+                key={label}
+                className="liquid-glass group flex min-h-[74px] items-center gap-2 rounded-2xl px-3 py-3 transition-smooth hover:-translate-y-1"
+                style={{ animationDelay: `${index * 120}ms` }}
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/65 text-berry shadow-sm">
+                  <Icon className="h-4 w-4" />
                 </span>
-                {item}
-              </li>
+                <span className="text-xs font-bold leading-tight text-berry/80">{label}</span>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
 
-        {/* RIGHT — collage */}
-        <HeroCollage />
+        <ClassroomScene />
+      </div>
+
+      <div className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-3 text-[10px] font-bold uppercase tracking-[0.22em] text-berry/45 lg:flex">
+        <span className="h-px w-12 bg-berry/20" /> Discover their day <span className="h-px w-12 bg-berry/20" />
       </div>
     </section>
   );
 }
 
-function HeroCollage() {
+function ClassroomScene() {
   return (
-    <div className="relative mx-auto aspect-[5/6] w-full max-w-[620px]">
-      {/* big rounded frame top-right */}
-      <CollageFrame
-        className="absolute right-0 top-0 h-[58%] w-[62%] animate-float-soft"
-        style={{ ['--r' as string]: '1.5deg' }}
-        tint="rose"
-      >
-        <SceneStoryTime />
-        <BadgeChip className="absolute -bottom-3 left-6 bg-white text-berry">
-          <BookOpen className="h-3.5 w-3.5" /> Story time
-        </BadgeChip>
-      </CollageFrame>
+    <div className="relative z-10 mx-auto aspect-[1/1.06] w-full max-w-[760px] animate-fade-up lg:max-w-none">
+      <div className="classroom-shell absolute inset-[4%] overflow-hidden rounded-[42px] sm:rounded-[58px]">
+        <svg viewBox="0 0 760 800" className="h-full w-full" role="img" aria-label="Illustrated bright Rosebery learning room">
+          <defs>
+            <linearGradient id="room-wall" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stopColor="#fffaf2" />
+              <stop offset="1" stopColor="#f4dfca" />
+            </linearGradient>
+            <linearGradient id="window-light" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stopColor="#ffffff" stopOpacity=".95" />
+              <stop offset="1" stopColor="#bfe6fb" stopOpacity=".35" />
+            </linearGradient>
+            <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="180%">
+              <feDropShadow dx="0" dy="18" stdDeviation="14" floodColor="#7a1f4d" floodOpacity=".15" />
+            </filter>
+          </defs>
+          <rect width="760" height="800" fill="url(#room-wall)" />
+          <circle cx="650" cy="100" r="150" fill="#f9cfd1" opacity=".4" />
+          <path d="M0 610 Q270 540 760 620 V800 H0Z" fill="#c9d8b8" />
+          <path d="M0 665 Q310 590 760 660 V800 H0Z" fill="#a8c5a1" opacity=".55" />
 
-      {/* tall left */}
-      <CollageFrame
-        className="absolute left-0 top-[12%] h-[52%] w-[42%] animate-float-soft"
-        style={{ ['--r' as string]: '-2deg', animationDelay: '1.2s' }}
-        tint="sky"
-      >
-        <SceneBlocks />
-      </CollageFrame>
+          <g filter="url(#soft-shadow)">
+            <rect x="70" y="78" width="250" height="282" rx="30" fill="#fffdf9" stroke="#fff" strokeWidth="12" />
+            <rect x="92" y="100" width="206" height="238" rx="19" fill="url(#window-light)" />
+            <path d="M195 100V338M92 218H298" stroke="#fff" strokeWidth="12" />
+            <circle cx="138" cy="150" r="26" fill="#f8d074" />
+            <path d="M94 281 Q142 230 186 281 T298 272 V338 H92Z" fill="#a8c5a1" />
+          </g>
 
-      {/* small mid */}
-      <CollageFrame
-        className="absolute left-[34%] top-[46%] h-[26%] w-[30%] animate-float-soft"
-        style={{ ['--r' as string]: '3deg', animationDelay: '2s' }}
-        tint="sage"
-      >
-        <SceneMeals />
-      </CollageFrame>
+          <g transform="translate(515 120)" filter="url(#soft-shadow)">
+            <rect width="150" height="240" rx="18" fill="#fffaf5" />
+            <rect x="18" y="40" width="114" height="12" rx="6" fill="#7a1f4d" opacity=".2" />
+            <rect x="18" y="102" width="114" height="12" rx="6" fill="#7a1f4d" opacity=".2" />
+            <rect x="18" y="164" width="114" height="12" rx="6" fill="#7a1f4d" opacity=".2" />
+            <rect x="28" y="17" width="20" height="25" rx="3" fill="#e65a7a" />
+            <rect x="52" y="11" width="18" height="31" rx="3" fill="#a9d8f5" />
+            <rect x="74" y="20" width="24" height="22" rx="3" fill="#f4c75e" />
+            <rect x="36" y="72" width="30" height="30" rx="5" fill="#a7c7a3" />
+            <circle cx="98" cy="86" r="16" fill="#f2af9f" />
+            <path d="M35 160 L60 124 L85 160Z" fill="#a9d8f5" />
+          </g>
 
-      {/* bottom wide */}
-      <CollageFrame
-        className="absolute bottom-0 right-[4%] h-[40%] w-[60%] animate-float-soft"
-        style={{ ['--r' as string]: '-1.5deg', animationDelay: '0.6s' }}
-        tint="beige"
-      >
-        <SceneCreative />
-        <BadgeChip className="absolute -top-3 right-6 bg-berry text-white">
-          <Palette className="h-3.5 w-3.5" /> Creative play
-        </BadgeChip>
-      </CollageFrame>
+          <g transform="translate(126 457)" filter="url(#soft-shadow)">
+            <ellipse cx="250" cy="172" rx="250" ry="72" fill="#f5c9bf" />
+            <ellipse cx="250" cy="150" rx="190" ry="70" fill="#f7e0b9" />
+            <rect x="224" y="146" width="52" height="146" rx="20" fill="#d6a675" />
+          </g>
 
-      {/* floating reassurance badge */}
-      <div className="absolute -left-2 bottom-[18%] z-20 hidden rounded-2xl bg-white px-4 py-3 shadow-[0_18px_40px_-18px_rgba(122,31,77,0.25)] ring-1 ring-berry/5 sm:block">
+          <g transform="translate(285 315)" filter="url(#soft-shadow)">
+            <circle cx="98" cy="82" r="47" fill="#9b694c" />
+            <path d="M52 78 Q54 20 100 20 Q145 24 148 80 Q128 55 103 62 Q78 50 52 78Z" fill="#49372f" />
+            <circle cx="84" cy="82" r="3.5" fill="#402b26" />
+            <circle cx="112" cy="82" r="3.5" fill="#402b26" />
+            <path d="M88 102 Q98 110 110 101" fill="none" stroke="#6d3f34" strokeWidth="4" strokeLinecap="round" />
+            <path d="M56 135 Q98 106 140 135 L154 245 Q101 268 42 242Z" fill="#e65a7a" />
+            <path d="M43 152 Q4 182 20 222" fill="none" stroke="#9b694c" strokeWidth="22" strokeLinecap="round" />
+            <path d="M146 152 Q184 170 184 213" fill="none" stroke="#9b694c" strokeWidth="22" strokeLinecap="round" />
+          </g>
+
+          <g transform="translate(390 505) rotate(4)" filter="url(#soft-shadow)">
+            <path d="M0 30 L92 5 L92 108 L0 126Z" fill="#fffdf7" />
+            <path d="M184 30 L92 5 L92 108 L184 126Z" fill="#fff8e8" />
+            <path d="M92 5V108" stroke="#d89ba6" strokeWidth="4" />
+            <circle cx="48" cy="64" r="18" fill="#a9d8f5" />
+            <path d="M118 82 Q140 30 162 82Z" fill="#a7c7a3" />
+          </g>
+
+          <g filter="url(#soft-shadow)">
+            <rect x="104" y="640" width="78" height="78" rx="13" fill="#e65a7a" transform="rotate(-7 104 640)" />
+            <rect x="180" y="665" width="74" height="74" rx="13" fill="#a9d8f5" transform="rotate(5 180 665)" />
+            <rect x="574" y="615" width="70" height="70" rx="13" fill="#f4c75e" transform="rotate(8 574 615)" />
+          </g>
+        </svg>
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,.3),transparent_35%,rgba(122,31,77,.04))]" />
+      </div>
+
+      <div className="liquid-glass absolute left-0 top-[12%] rounded-2xl px-4 py-3 shadow-xl sm:left-[1%] sm:rounded-3xl sm:px-5 sm:py-4">
         <div className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-sage/25 text-[#4F7050]">
-            <Shield className="h-4.5 w-4.5" />
-          </span>
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-berry/55">Safeguarding</p>
-            <p className="text-sm font-semibold text-berry">DBS &amp; first aid checked</p>
-          </div>
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-sage/35 text-berry"><ShieldCheck className="h-5 w-5" /></span>
+          <div><p className="text-[10px] font-bold uppercase tracking-[0.17em] text-berry/50">Every child</p><p className="text-sm font-bold text-berry sm:text-base">Known &amp; cared for</p></div>
         </div>
       </div>
+      <div className="liquid-glass absolute bottom-[7%] right-0 rounded-2xl px-4 py-3 shadow-xl sm:right-[1%] sm:rounded-3xl sm:px-5 sm:py-4">
+        <div className="flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-sky/45 text-berry"><MessageCircle className="h-5 w-5" /></span>
+          <div><p className="text-[10px] font-bold uppercase tracking-[0.17em] text-berry/50">Parent update</p><p className="text-sm font-bold text-berry sm:text-base">A lovely day today</p></div>
+        </div>
+      </div>
+      <Sparkles className="float-star absolute right-[8%] top-[5%] h-8 w-8 text-rose sm:h-10 sm:w-10" />
+      <Star className="float-star absolute bottom-[17%] left-[4%] h-6 w-6 fill-[#f4c75e] text-[#f4c75e]" style={{ animationDelay: '1.6s' }} />
     </div>
   );
 }
-
-function CollageFrame({
-  children,
-  className,
-  style,
-  tint,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-  tint: 'rose' | 'sky' | 'sage' | 'beige';
-}) {
-  const tints = {
-    rose: 'from-[#F9DCD8] to-[#F4C2C0]',
-    sky: 'from-[#DCEEF9] to-[#BCDEF4]',
-    sage: 'from-[#E1ECDB] to-[#BFD6B6]',
-    beige: 'from-[#F6E8D2] to-[#E9D2B3]',
-  } as const;
-  return (
-    <div
-      className={`overflow-hidden rounded-[28px] bg-white p-1.5 shadow-[0_30px_60px_-30px_rgba(122,31,77,0.28)] ring-1 ring-black/[0.04] ${className ?? ''}`}
-      style={style}
-    >
-      <div className={`relative h-full w-full overflow-hidden rounded-[22px] bg-gradient-to-br ${tints[tint]}`}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function BadgeChip({ children, className }: { children: React.ReactNode; className?: string }) {
-  return (
-    <span
-      className={`absolute z-10 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold shadow-[0_8px_20px_-6px_rgba(122,31,77,0.25)] ring-1 ring-black/[0.04] ${className ?? ''}`}
-    >
-      {children}
-    </span>
-  );
-}
-
-/* -------------------- Scene illustrations (inline SVG) -------------------- */
-
-function SceneStoryTime() {
-  return (
-    <svg viewBox="0 0 400 300" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="floorRose" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stopColor="#F8D1CD" />
-          <stop offset="1" stopColor="#EAA8A2" />
-        </linearGradient>
-      </defs>
-      <rect width="400" height="300" fill="url(#floorRose)" />
-      <circle cx="320" cy="60" r="30" fill="#FFF3D6" opacity="0.85" />
-      {/* rug */}
-      <ellipse cx="200" cy="245" rx="180" ry="36" fill="#E08A8A" opacity="0.45" />
-      {/* big open book */}
-      <g transform="translate(120 175)">
-        <path d="M0 30 L80 10 L80 70 L0 90 Z" fill="#FFF9F0" />
-        <path d="M160 30 L80 10 L80 70 L160 90 Z" fill="#FFF9F0" />
-        <path d="M80 10 L80 70" stroke="#C58484" strokeWidth="2" />
-        <rect x="14" y="40" width="50" height="3" fill="#C58484" opacity="0.5" />
-        <rect x="14" y="50" width="40" height="3" fill="#C58484" opacity="0.4" />
-        <rect x="96" y="40" width="50" height="3" fill="#C58484" opacity="0.5" />
-        <rect x="96" y="50" width="40" height="3" fill="#C58484" opacity="0.4" />
-      </g>
-      {/* sitting child silhouettes */}
-      <g fill="#7A1F4D" opacity="0.85">
-        <circle cx="80" cy="155" r="14" />
-        <path d="M58 200 Q80 168 102 200 L102 230 L58 230 Z" />
-      </g>
-      <g fill="#5C7E58" opacity="0.9">
-        <circle cx="320" cy="155" r="14" />
-        <path d="M298 200 Q320 168 342 200 L342 230 L298 230 Z" />
-      </g>
-    </svg>
-  );
-}
-
-function SceneBlocks() {
-  return (
-    <svg viewBox="0 0 300 400" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
-      <rect width="300" height="400" fill="#DCEEF9" />
-      <rect y="290" width="300" height="110" fill="#C2DFF1" />
-      {/* stack of blocks */}
-      <g>
-        <rect x="80" y="210" width="60" height="60" rx="8" fill="#E65A7A" />
-        <rect x="140" y="240" width="60" height="60" rx="8" fill="#A7C7A3" />
-        <rect x="100" y="150" width="60" height="60" rx="8" fill="#F4C75E" />
-        <rect x="160" y="180" width="60" height="60" rx="8" fill="#7A1F4D" />
-        <rect x="120" y="90" width="60" height="60" rx="8" fill="#A9D8F5" stroke="#5BA0CC" strokeWidth="2" />
-      </g>
-      {/* sun */}
-      <circle cx="240" cy="60" r="22" fill="#FFE1A8" />
-    </svg>
-  );
-}
-
-function SceneMeals() {
-  return (
-    <svg viewBox="0 0 300 200" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
-      <rect width="300" height="200" fill="#E1ECDB" />
-      {/* plate */}
-      <circle cx="150" cy="115" r="62" fill="#FFFDF6" />
-      <circle cx="150" cy="115" r="50" fill="#F4E1C9" />
-      {/* apple */}
-      <circle cx="135" cy="105" r="14" fill="#E65A7A" />
-      <rect x="133" y="86" width="2" height="6" fill="#5C7E58" />
-      {/* carrot */}
-      <path d="M160 95 L182 120 L168 130 Z" fill="#F19867" />
-      {/* broccoli */}
-      <circle cx="165" cy="135" r="10" fill="#7FAA76" />
-      <circle cx="155" cy="138" r="8" fill="#7FAA76" />
-    </svg>
-  );
-}
-
-function SceneCreative() {
-  return (
-    <svg viewBox="0 0 500 250" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
-      <rect width="500" height="250" fill="#F6E8D2" />
-      {/* paint splotches */}
-      <circle cx="90" cy="80" r="34" fill="#E65A7A" opacity="0.85" />
-      <circle cx="420" cy="70" r="28" fill="#A7C7A3" opacity="0.9" />
-      <circle cx="380" cy="180" r="24" fill="#A9D8F5" opacity="0.9" />
-      {/* crayons */}
-      <g transform="translate(120 130) rotate(-12)">
-        <rect width="220" height="30" rx="6" fill="#FFF8EC" />
-        <rect width="40" height="30" fill="#E65A7A" />
-        <rect x="40" width="40" height="30" fill="#F4C75E" />
-        <rect x="80" width="40" height="30" fill="#A7C7A3" />
-        <rect x="120" width="40" height="30" fill="#A9D8F5" />
-        <rect x="160" width="40" height="30" fill="#7A1F4D" />
-      </g>
-      {/* paper */}
-      <rect x="40" y="160" width="120" height="70" rx="6" fill="#FFFDF7" transform="rotate(-6 40 160)" />
-    </svg>
-  );
-}
-
-/* -------------------- TRUST STRIP -------------------- */
-
-function TrustStrip() {
-  const items = [
-    { icon: Shield, label: 'DBS checked' },
-    { icon: Heart, label: 'First aid trained' },
-    { icon: Users, label: 'Small groups' },
-    { icon: HomeIcon, label: 'Facility-based' },
-    { icon: Bell, label: 'Daily updates' },
-  ];
-  return (
-    <section className="border-y border-berry/5 bg-white/60 py-6">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-4 sm:px-6 lg:px-8">
-        {items.map((i) => (
-          <div key={i.label} className="flex items-center gap-2 text-sm font-medium text-berry/70">
-            <i.icon className="h-4 w-4 text-[#5C7E58]" />
-            {i.label}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* -------------------- A DAY AT ROSEBERY -------------------- */
-
-const dayStages = [
-  { title: 'Arrival', time: '8:00', icon: Sun, tint: '#FFE6BF', desc: 'A calm welcome and gentle settling in.' },
-  { title: 'Breakfast', time: '8:30', icon: Apple, tint: '#F8D1CD', desc: 'Warm routines and healthy starts.' },
-  { title: 'Story Time', time: '10:00', icon: BookOpen, tint: '#DCEEF9', desc: 'Books, voices and language together.' },
-  { title: 'Creative Play', time: '11:00', icon: Palette, tint: '#E1ECDB', desc: 'Painting, building and free play.' },
-  { title: 'Lunch', time: '12:30', icon: Utensils, tint: '#F4E1C9', desc: 'A steady pause for food and chat.' },
-  { title: 'Quiet Time', time: '13:30', icon: Moon, tint: '#E6DEF0', desc: 'Rest, comfort and reset.' },
-  { title: 'Home Time', time: '17:00', icon: Heart, tint: '#FBDDD2', desc: 'Clear updates for every parent.' },
-];
 
 function DayAtRosebery() {
   return (
-    <section className="section-pad">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead
-          eyebrow="A day at Rosebery"
-          title="A rhythm children can trust"
-          intro="Every day is built around warmth, safety, small-group attention and simple routines parents understand."
-        />
+    <section className="day-journey relative isolate overflow-hidden py-24 md:py-32">
+      <div className="absolute left-[4%] top-20 h-16 w-28 rounded-full bg-white/65 blur-[1px] before:absolute before:-top-6 before:left-5 before:h-14 before:w-14 before:rounded-full before:bg-white/65 after:absolute after:-top-4 after:right-5 after:h-12 after:w-12 after:rounded-full after:bg-white/65" />
+      <div className="absolute right-[8%] top-36 h-12 w-24 rounded-full bg-white/55 before:absolute before:-top-5 before:left-4 before:h-10 before:w-10 before:rounded-full before:bg-white/55" />
+      <Send className="paper-plane absolute left-[8%] top-[27%] h-8 w-8 rotate-12 text-rose/70 md:h-11 md:w-11" />
+      <Sparkles className="float-star absolute right-[12%] top-[22%] h-7 w-7 text-[#d5a838]" />
 
-        <div className="relative mt-14">
-          {/* connector line */}
-          <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-berry/15 to-transparent md:block" />
+      <div className="relative mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
+        <SectionHeading eyebrow="A day at Rosebery" title="Every little moment becomes part of their story" copy="A familiar, reassuring rhythm with room for discovery, friendships, rest and plenty of joy." />
 
-          <div className="flex gap-5 overflow-x-auto pb-4 md:grid md:grid-cols-4 md:overflow-visible lg:grid-cols-7">
-            {dayStages.map((s) => (
-              <div
-                key={s.title}
-                className="warm-card group relative min-w-[200px] rounded-2xl p-5 transition-smooth hover:-translate-y-1"
-              >
-                <div
-                  className="flex h-12 w-12 items-center justify-center rounded-xl"
-                  style={{ background: s.tint }}
-                >
-                  <s.icon className="h-5 w-5 text-berry" />
-                </div>
-                <p className="mt-4 text-[11px] font-semibold uppercase tracking-wider text-berry/50">
-                  {s.time}
-                </p>
-                <h3 className="mt-1 font-display text-2xl uppercase text-berry">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-berry/65">{s.desc}</p>
+        <div className="mt-14 flex gap-5 overflow-x-auto pb-8 pt-3 scrollbar-thin lg:grid lg:grid-cols-7 lg:overflow-visible">
+          {dayStages.map(({ time, title, icon: Icon, copy }, index) => (
+            <article key={title} className="liquid-glass day-card group min-w-[230px] rounded-[28px] p-5 lg:min-w-0" style={{ animationDelay: `${index * 90}ms` }}>
+              <div className="flex items-start justify-between">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/65 text-berry shadow-sm"><Icon className="h-5 w-5" /></span>
+                <span className="rounded-full bg-berry/8 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-berry/60">{time}</span>
               </div>
-            ))}
-          </div>
+              <div className="mt-12 lg:mt-20">
+                <p className="font-display text-3xl uppercase leading-none text-berry">{title}</p>
+                <p className="mt-3 text-sm leading-6 text-berry/65">{copy}</p>
+              </div>
+              <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-rose to-sky transition-all duration-500 group-hover:w-full" />
+            </article>
+          ))}
         </div>
       </div>
     </section>
   );
 }
-
-/* -------------------- INSIDE ROSEBERY -------------------- */
-
-const insideCards = [
-  { title: 'Story Time', tag: 'Language', tint: 'rose', Scene: SceneStoryTime },
-  { title: 'Creative Learning', tag: 'Discovery', tint: 'beige', Scene: SceneCreative },
-  { title: 'Healthy Meals', tag: 'Wellbeing', tint: 'sage', Scene: SceneMeals },
-  { title: 'Small Group Care', tag: 'Connection', tint: 'sky', Scene: SceneBlocks },
-  { title: 'Parent Updates', tag: 'Transparency', tint: 'rose', Scene: SceneMeals },
-  { title: 'Quiet Spaces', tag: 'Comfort', tint: 'sage', Scene: SceneStoryTime },
-] as const;
 
 function InsideRosebery() {
   return (
-    <section className="section-pad bg-[#FBF3E6]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead
-          eyebrow="Inside Rosebery"
-          title="Real moments, calm spaces"
-          intro="A look inside our day — the kind of care, attention and gentle learning we build every routine around."
-        />
-
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {insideCards.map((c) => (
-            <article key={c.title + c.tag} className="group cursor-pointer">
-              <CollageFrame className="aspect-[4/3] w-full" tint={c.tint as never}>
-                <c.Scene />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/85 text-berry shadow-xl ring-1 ring-white/60 backdrop-blur transition-smooth group-hover:scale-110">
-                    <Play className="ml-0.5 h-5 w-5 fill-berry" />
-                  </span>
-                </div>
-                <span className="absolute left-4 top-4 rounded-full bg-white/85 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-berry shadow-sm">
-                  {c.tag}
-                </span>
-              </CollageFrame>
-              <h3 className="mt-4 font-display text-2xl uppercase text-berry">{c.title}</h3>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------- CHILDMINDERS -------------------- */
-
-const childminders = [
-  {
-    name: 'Maryam Ibrahim',
-    role: 'Independent childminder',
-    experience: '8 years',
-    qualifications: 'DBS · Safeguarding · First Aid',
-    group: 'Up to 12 children',
-    values: 'Calm routines, stories, belonging',
-    interests: 'Reading, nature walks',
-    initials: 'MI',
-    color: '#E1ECDB',
-  },
-  {
-    name: 'Khadija Noor',
-    role: 'Independent childminder',
-    experience: '6 years',
-    qualifications: 'Early years · Food hygiene',
-    group: 'Up to 10 children',
-    values: 'Creative play, confidence, care',
-    interests: 'Art, music, sensory play',
-    initials: 'KN',
-    color: '#DCEEF9',
-  },
-  {
-    name: 'Amina Farooq',
-    role: 'Independent childminder',
-    experience: '7 years',
-    qualifications: 'First Aid · SEND awareness',
-    group: 'Up to 8 children',
-    values: 'Small groups, trust, gentle learning',
-    interests: 'Storytelling, outdoor play',
-    initials: 'AF',
-    color: '#F8D1CD',
-  },
-];
-
-function MeetChildminders() {
-  return (
-    <section className="section-pad">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead
-          eyebrow="Meet our childminders"
-          title="Independent, qualified, devoted"
-          intro="Our childminders operate independently within Rosebery's supported premises — sharing values, not a uniform."
-        />
-
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {childminders.map((p) => (
-            <article key={p.name} className="warm-card overflow-hidden rounded-3xl">
-              <div
-                className="relative flex h-56 items-end justify-center p-6"
-                style={{ background: p.color }}
-              >
-                <div className="absolute left-5 top-5">
-                  <span className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-berry/70">
-                    {p.experience} experience
-                  </span>
-                </div>
-                <div className="flex h-28 w-28 items-center justify-center rounded-full bg-white font-display text-4xl text-berry shadow-[0_18px_30px_-12px_rgba(122,31,77,0.25)]">
-                  {p.initials}
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-display text-2xl uppercase text-berry">{p.name}</h3>
-                <p className="text-sm font-medium text-berry/60">{p.role}</p>
-
-                <dl className="mt-5 space-y-3 text-sm">
-                  <ProfileRow label="Qualifications" value={p.qualifications} />
-                  <ProfileRow label="Group size" value={p.group} />
-                  <ProfileRow label="Values" value={p.values} />
-                  <ProfileRow label="Interests" value={p.interests} />
-                </dl>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ProfileRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex flex-col gap-0.5 border-t border-berry/5 pt-3">
-      <dt className="text-[11px] font-semibold uppercase tracking-wider text-berry/45">{label}</dt>
-      <dd className="text-berry/85">{value}</dd>
-    </div>
-  );
-}
-
-/* -------------------- PARENT PORTAL -------------------- */
-
-function ParentPortal() {
-  return (
-    <section className="section-pad bg-[#F6EFE3]">
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8">
-        <div>
-          <Eyebrow>Parent portal</Eyebrow>
-          <h2 className="mt-4 font-display text-4xl uppercase leading-[1.02] text-berry md:text-5xl">
-            Your child's day, in your pocket.
-          </h2>
-          <p className="mt-5 max-w-lg text-lg leading-relaxed text-berry/70">
-            Attendance, meals, activities, messages, invoices and announcements — clear,
-            gentle updates that keep families close throughout the day.
-          </p>
-          <ul className="mt-7 grid max-w-md grid-cols-2 gap-x-6 gap-y-3 text-sm font-medium text-berry/80">
-            {['Attendance', 'Meals', 'Activities', 'Messages', 'Invoices', 'Announcements'].map((f) => (
-              <li key={f} className="flex items-center gap-2">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-sage/25">
-                  <Check className="h-3 w-3" strokeWidth={3} style={{ color: '#5C7E58' }} />
-                </span>
-                {f}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="relative mx-auto flex h-[560px] w-full max-w-[520px] items-center justify-center">
-          <Phone className="absolute left-2 top-6 -rotate-[6deg] scale-[0.92] opacity-90" variant="updates" />
-          <Phone className="z-10" variant="today" />
-          <Phone className="absolute right-2 top-10 rotate-[6deg] scale-[0.92] opacity-90" variant="messages" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Phone({ className, variant }: { className?: string; variant: 'today' | 'updates' | 'messages' }) {
-  return (
-    <div
-      className={`h-[520px] w-[250px] rounded-[40px] bg-berry p-2 shadow-[0_30px_60px_-20px_rgba(122,31,77,0.45)] ${className ?? ''}`}
-    >
-      <div className="flex h-full flex-col rounded-[32px] bg-cream p-4 text-berry">
-        <div className="mx-auto h-1 w-16 rounded-full bg-berry/15" />
-        {variant === 'today' && <PhoneToday />}
-        {variant === 'updates' && <PhoneUpdates />}
-        {variant === 'messages' && <PhoneMessages />}
-      </div>
-    </div>
-  );
-}
-
-function PhoneToday() {
-  return (
-    <div className="mt-4 flex h-full flex-col">
-      <p className="text-[11px] font-semibold uppercase tracking-wider text-berry/55">Today</p>
-      <h4 className="font-display text-2xl uppercase">Yusuf — Tuesday</h4>
-      <div className="mt-4 grid grid-cols-2 gap-2">
-        <Stat icon={Apple} label="Lunch" value="Ate well" tint="#E1ECDB" />
-        <Stat icon={Moon} label="Nap" value="45 min" tint="#E6DEF0" />
-        <Stat icon={Palette} label="Activity" value="Painting" tint="#F8D1CD" />
-        <Stat icon={Heart} label="Mood" value="Happy" tint="#FBDDD2" />
-      </div>
-      <div className="mt-4 rounded-2xl bg-white p-3 shadow-sm">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-berry/50">Today's note</p>
-        <p className="mt-1 text-xs leading-relaxed text-berry/80">
-          Yusuf loved story time and built a tower of 6 blocks!
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function PhoneUpdates() {
-  const items = [
-    { icon: Bell, label: 'Drop-off', t: '8:12' },
-    { icon: Apple, label: 'Breakfast', t: '8:35' },
-    { icon: BookOpen, label: 'Story time', t: '10:05' },
-    { icon: Utensils, label: 'Lunch', t: '12:30' },
-  ];
-  return (
-    <div className="mt-4 flex h-full flex-col">
-      <p className="text-[11px] font-semibold uppercase tracking-wider text-berry/55">Updates</p>
-      <h4 className="font-display text-2xl uppercase">Today</h4>
-      <div className="mt-3 space-y-2">
-        {items.map((i) => (
-          <div key={i.label} className="flex items-center justify-between rounded-xl bg-white p-2.5 shadow-sm">
-            <div className="flex items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream">
-                <i.icon className="h-4 w-4 text-berry" />
-              </span>
-              <span className="text-xs font-semibold">{i.label}</span>
-            </div>
-            <span className="text-[10px] font-medium text-berry/55">{i.t}</span>
+    <section className="relative bg-[#f7eadc] py-24 md:py-32">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <SectionHeading eyebrow="Inside Rosebery" title="See the warmth in every frame" copy="A video-first window into the moments parents care about most." align="left" />
+          <div className="liquid-glass hidden items-center gap-3 rounded-full px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-berry/65 md:flex">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-rose" /> Rosebery moments
           </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PhoneMessages() {
-  return (
-    <div className="mt-4 flex h-full flex-col">
-      <p className="text-[11px] font-semibold uppercase tracking-wider text-berry/55">Messages</p>
-      <h4 className="font-display text-2xl uppercase">Maryam</h4>
-      <div className="mt-4 space-y-2 text-xs">
-        <div className="max-w-[80%] rounded-2xl rounded-bl-md bg-white p-2.5 shadow-sm">
-          Good morning! Yusuf had a lovely settle in.
         </div>
-        <div className="ml-auto max-w-[80%] rounded-2xl rounded-br-md bg-rose/15 p-2.5 text-berry">
-          Thank you! He was so excited today 🥰
-        </div>
-        <div className="max-w-[80%] rounded-2xl rounded-bl-md bg-white p-2.5 shadow-sm">
-          We'll send a photo after lunch ✨
-        </div>
-      </div>
-    </div>
-  );
-}
 
-function Stat({
-  icon: Icon, label, value, tint,
-}: { icon: typeof Apple; label: string; value: string; tint: string }) {
-  return (
-    <div className="rounded-2xl p-3 shadow-sm" style={{ background: tint }}>
-      <Icon className="h-4 w-4 text-berry" />
-      <p className="mt-2 text-[10px] font-semibold uppercase tracking-wider text-berry/55">{label}</p>
-      <p className="text-xs font-semibold text-berry">{value}</p>
-    </div>
-  );
-}
-
-/* -------------------- TESTIMONIALS -------------------- */
-
-const testimonials = [
-  {
-    name: 'Aisha R.',
-    relation: 'Parent of two',
-    rating: 5,
-    body: 'Rosebery feels like an extension of our family. The daily updates are gentle and detailed — we always know how the day went.',
-    tint: '#F8D1CD',
-  },
-  {
-    name: 'Sofia K.',
-    relation: 'Parent',
-    rating: 5,
-    body: "Small groups make such a difference. Our daughter is known, seen and cared for — not just minded.",
-    tint: '#DCEEF9',
-  },
-  {
-    name: 'Hassan M.',
-    relation: 'Parent of one',
-    rating: 5,
-    body: 'Warm, professional and genuinely community-led. The childminders are wonderful with our son.',
-    tint: '#E1ECDB',
-  },
-];
-
-function Testimonials() {
-  return (
-    <section className="section-pad">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead
-          eyebrow="Parent voices"
-          title="Loved by Liverpool families"
-          intro="What families tell us about life with Rosebery — in their own words."
-        />
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <figure key={t.name} className="warm-card flex flex-col rounded-3xl p-7">
-              <div className="flex gap-0.5 text-[#E0A93C]">
-                {Array.from({ length: t.rating }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
-              <blockquote className="mt-5 text-lg leading-relaxed text-berry/85">
-                "{t.body}"
-              </blockquote>
-              <figcaption className="mt-6 flex items-center gap-3 border-t border-berry/5 pt-5">
-                <span
-                  className="flex h-11 w-11 items-center justify-center rounded-full font-display text-lg text-berry"
-                  style={{ background: t.tint }}
-                >
-                  {t.name.split(' ').map((p) => p[0]).join('')}
-                </span>
-                <div>
-                  <p className="font-semibold text-berry">{t.name}</p>
-                  <p className="text-xs text-berry/55">{t.relation}</p>
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-12">
+          {showcaseCards.map((card, index) => (
+            <article key={card.title} className={`video-card liquid-glass group rounded-[32px] p-2 ${index < 2 ? 'lg:col-span-6' : 'lg:col-span-3'}`}>
+              <div className={`relative overflow-hidden rounded-[25px] ${index < 2 ? 'aspect-[16/10]' : 'aspect-[4/5]'}`}>
+                <ShowcaseScene type={card.scene} tone={card.tone} />
+                <div className="absolute inset-0 bg-gradient-to-t from-berry/55 via-transparent to-white/10" />
+                <button type="button" aria-label={`Play ${card.title} preview`} className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/65 bg-white/25 text-white shadow-2xl backdrop-blur-xl transition duration-500 group-hover:scale-110 group-hover:bg-white/35">
+                  <Play className="ml-1 h-6 w-6 fill-current" />
+                </button>
+                <div className="liquid-glass absolute inset-x-3 bottom-3 rounded-[22px] px-4 py-4 text-white">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/70">{card.tag}</p>
+                  <h3 className="mt-1 font-display text-2xl uppercase tracking-normal">{card.title}</h3>
+                  <p className="mt-1 text-xs leading-5 text-white/78">{card.caption}</p>
                 </div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------- WHY PARENTS -------------------- */
-
-const reasons = [
-  { title: 'Safe Environment', icon: Shield, desc: 'Safeguarding, risk assessments and clear house procedures throughout the day.', tint: '#E1ECDB' },
-  { title: 'Small Groups', icon: Users, desc: 'Independent childminders create warmer, calmer group relationships.', tint: '#DCEEF9' },
-  { title: 'Independent Childminders', icon: HomeIcon, desc: 'Trusted, qualified providers operating with shared values and standards.', tint: '#F8D1CD' },
-  { title: 'Community Values', icon: Heart, desc: 'Operating under Liverpool Muslim Society for local, lasting community benefit.', tint: '#F4E1C9' },
-  { title: 'Daily Updates', icon: Bell, desc: 'A parent portal that keeps care visible, transparent and emotionally close.', tint: '#E6DEF0' },
-  { title: 'Professional Support', icon: FileText, desc: 'Admin, room allocation, invoices and shared systems so childminders can focus on care.', tint: '#FBDDD2' },
-];
-
-function WhyParents() {
-  return (
-    <section className="section-pad bg-[#FBF3E6]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead
-          eyebrow="Why parents choose Rosebery"
-          title="Built for trust"
-          intro="Six commitments that shape every routine, every decision and every conversation with families."
-        />
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {reasons.map((r) => (
-            <div key={r.title} className="warm-card group rounded-3xl p-7 transition-smooth hover:-translate-y-1">
-              <div
-                className="flex h-14 w-14 items-center justify-center rounded-2xl"
-                style={{ background: r.tint }}
-              >
-                <r.icon className="h-6 w-6 text-berry" />
               </div>
-              <h3 className="mt-6 font-display text-2xl uppercase text-berry">{r.title}</h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-berry/68">{r.desc}</p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
@@ -761,35 +288,103 @@ function WhyParents() {
   );
 }
 
-/* -------------------- FINAL CTA -------------------- */
+function ShowcaseScene({ type, tone }: { type: typeof showcaseCards[number]['scene']; tone: typeof showcaseCards[number]['tone'] }) {
+  const colors = {
+    rose: ['#f7c5c1', '#e88f95'], sky: ['#d9effb', '#91cbe8'], sage: ['#dcebd4', '#91b88e'],
+    berry: ['#cf8ca8', '#7a1f4d'], sun: ['#f8e1a6', '#eda778'], lavender: ['#e8dff0', '#b8a6ce'],
+  }[tone];
+  return (
+    <svg viewBox="0 0 600 500" className="h-full w-full scale-[1.02] transition duration-700 group-hover:scale-110" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><linearGradient id={`scene-${type}`} x1="0" x2="1" y1="0" y2="1"><stop stopColor={colors[0]} /><stop offset="1" stopColor={colors[1]} /></linearGradient></defs>
+      <rect width="600" height="500" fill={`url(#scene-${type})`} />
+      <circle cx="500" cy="80" r="120" fill="#fff" opacity=".22" />
+      {type === 'story' && <><ellipse cx="300" cy="420" rx="260" ry="70" fill="#fff" opacity=".2" /><path d="M145 280 L300 235 L300 405 L145 450Z" fill="#fff9ef" /><path d="M455 280 L300 235 L300 405 L455 450Z" fill="#fff4dc" /><circle cx="115" cy="275" r="36" fill="#7a1f4d" /><circle cx="485" cy="275" r="36" fill="#638060" /></>}
+      {type === 'creative' && <><rect x="120" y="110" width="350" height="290" rx="20" fill="#fff9ef" transform="rotate(-5 120 110)" /><path d="M175 310 Q240 110 305 310 T430 270" fill="none" stroke="#e65a7a" strokeWidth="25" strokeLinecap="round" /><circle cx="200" cy="180" r="34" fill="#f4c75e" /><g transform="translate(80 390) rotate(-12)"><rect width="320" height="30" rx="10" fill="#7a1f4d" /><rect x="80" width="80" height="30" fill="#a7c7a3" /><rect x="160" width="80" height="30" fill="#a9d8f5" /></g></>}
+      {type === 'meal' && <><ellipse cx="300" cy="290" rx="220" ry="150" fill="#fff" opacity=".8" /><circle cx="300" cy="290" r="112" fill="#f9e3be" /><circle cx="260" cy="255" r="38" fill="#e65a7a" /><circle cx="360" cy="250" r="33" fill="#7fa776" /><path d="M275 345 L390 300 L350 380Z" fill="#eda778" /></>}
+      {type === 'blocks' && <><rect x="115" y="300" width="130" height="130" rx="18" fill="#f4c75e" /><rect x="245" y="250" width="130" height="180" rx="18" fill="#a9d8f5" /><rect x="375" y="320" width="110" height="110" rx="18" fill="#e65a7a" /><path d="M250 250 L310 150 L370 250Z" fill="#fff4dc" /></>}
+      {type === 'updates' && <><rect x="180" y="55" width="245" height="410" rx="42" fill="#fffaf2" stroke="#fff" strokeWidth="10" /><rect x="210" y="130" width="185" height="74" rx="18" fill="#f7d4d4" /><rect x="210" y="220" width="185" height="74" rx="18" fill="#dcebd4" /><rect x="210" y="310" width="185" height="74" rx="18" fill="#d9effb" /><circle cx="238" cy="167" r="16" fill="#e65a7a" /><circle cx="238" cy="257" r="16" fill="#7fa776" /><circle cx="238" cy="347" r="16" fill="#79bde0" /></>}
+      {type === 'quiet' && <><path d="M0 365 Q210 270 600 360 V500 H0Z" fill="#fff" opacity=".25" /><path d="M135 340 Q300 145 465 340 V430 H135Z" fill="#fff8ef" opacity=".9" /><circle cx="225" cy="260" r="70" fill="#fff" opacity=".55" /><path d="M420 115 Q355 175 420 230 Q500 220 515 145 Q470 168 420 115Z" fill="#fff4c4" /></>}
+    </svg>
+  );
+}
+
+function DigitalHub() {
+  return (
+    <section className="digital-hub relative isolate overflow-hidden py-24 text-white md:py-32">
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(135deg,#7a1f4d_0%,#91355e_42%,#b55d73_100%)]" />
+      <div className="absolute -left-20 top-10 -z-10 h-96 w-96 rounded-full bg-rose/30 blur-3xl" />
+      <div className="absolute -right-24 bottom-0 -z-10 h-[30rem] w-[30rem] rounded-full bg-sky/20 blur-3xl" />
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
+        <div className="grid items-end gap-8 lg:grid-cols-[1fr_.55fr]">
+          <SectionHeading eyebrow="The platform behind the care" title="A Complete Digital Hub for Rosebery" copy="One professional system designed to keep families informed, childminders supported and the whole organisation beautifully clear." align="left" inverse />
+          <div className="liquid-glass rounded-[28px] p-5 text-sm leading-6 text-white/75 lg:justify-self-end lg:max-w-sm">
+            <div className="flex gap-2 text-[#ffd77a]"><Star className="h-4 w-4 fill-current" /><Star className="h-4 w-4 fill-current" /><Star className="h-4 w-4 fill-current" /><Star className="h-4 w-4 fill-current" /><Star className="h-4 w-4 fill-current" /></div>
+            <p className="mt-3">A polished public website and a serious operational platform, working together as one Rosebery experience.</p>
+          </div>
+        </div>
+
+        <div className="mt-14 grid gap-5 md:grid-cols-2">
+          {portalCards.map((card) => <PortalPreview key={card.title} {...card} />)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PortalPreview({ title, label, icon: Icon, mode }: typeof portalCards[number]) {
+  return (
+    <article className="liquid-glass product-card group rounded-[32px] p-3 sm:p-4">
+      <div className="flex items-center justify-between px-2 pb-4 pt-1 sm:px-3">
+        <div className="flex items-center gap-3"><span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/15"><Icon className="h-5 w-5" /></span><div><h3 className="font-display text-2xl uppercase">{title}</h3><p className="text-xs text-white/60">{label}</p></div></div>
+        <ArrowRight className="h-5 w-5 text-white/45 transition group-hover:translate-x-1 group-hover:text-white" />
+      </div>
+      <div className="overflow-hidden rounded-[24px] bg-[#fff9f1] p-3 text-berry shadow-2xl sm:p-4">
+        <div className="mb-4 flex items-center justify-between"><div className="flex items-center gap-2"><span className="h-7 w-7 rounded-lg bg-gradient-to-br from-rose to-berry" /><span className="text-xs font-bold">Rosebery</span></div><div className="flex gap-1.5"><span className="h-2 w-2 rounded-full bg-rose/50" /><span className="h-2 w-2 rounded-full bg-sage" /><span className="h-2 w-2 rounded-full bg-sky" /></div></div>
+        <DashboardCanvas mode={mode} />
+      </div>
+    </article>
+  );
+}
+
+function DashboardCanvas({ mode }: { mode: typeof portalCards[number]['mode'] }) {
+  if (mode === 'parent') return <div className="grid grid-cols-[.8fr_1.2fr] gap-3"><div className="rounded-2xl bg-rose/10 p-3"><p className="text-[9px] font-bold uppercase text-berry/45">Today</p><p className="mt-1 font-display text-2xl">A lovely day</p><div className="mt-5 h-20 rounded-xl bg-gradient-to-br from-sky/50 to-sage/40" /></div><div className="space-y-2">{['Breakfast finished', 'Story time', 'Creative play'].map((x, i) => <div key={x} className="flex items-center gap-2 rounded-xl bg-white p-2 shadow-sm"><Check className="h-3.5 w-3.5 text-[#5c7e58]" /><span className="text-[10px] font-semibold">{x}</span><span className="ml-auto text-[8px] text-berry/40">{9 + i}:20</span></div>)}</div></div>;
+  if (mode === 'care') return <div className="grid grid-cols-3 gap-2"><div className="col-span-2 rounded-2xl bg-sage/25 p-3"><p className="text-[9px] font-bold uppercase text-berry/45">Children today</p><div className="mt-4 flex -space-x-2">{['MA','YN','SL','AR'].map((x, i) => <span key={x} className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white text-[9px] font-bold" style={{ background: ['#f5c9bf','#d9effb','#dcebd4','#f8e1a6'][i] }}>{x}</span>)}</div></div><div className="rounded-2xl bg-sky/30 p-3"><CalendarCheck className="h-4 w-4" /><p className="mt-5 font-display text-xl">8 / 10</p><p className="text-[8px] uppercase text-berry/50">Present</p></div><div className="col-span-3 flex items-center gap-2 rounded-xl bg-white p-2 shadow-sm"><Bell className="h-4 w-4 text-rose" /><span className="text-[10px] font-semibold">Three parent updates ready to send</span></div></div>;
+  if (mode === 'admin') return <div className="grid grid-cols-[1fr_.7fr] gap-3"><div className="rounded-2xl bg-white p-3 shadow-sm"><p className="text-[9px] font-bold uppercase text-berry/45">Hub attendance</p><div className="mt-5 flex h-20 items-end gap-2">{[45,70,55,88,78,62,92].map((h, i) => <span key={i} className="flex-1 rounded-t-md bg-gradient-to-t from-berry to-rose" style={{ height: `${h}%` }} />)}</div></div><div className="space-y-2">{[['Rooms','4 active'],['Children','38 today'],['Updates','12 sent']].map(([a,b]) => <div key={a} className="rounded-xl bg-beige/60 p-2"><p className="text-[8px] uppercase text-berry/45">{a}</p><p className="text-xs font-bold">{b}</p></div>)}</div></div>;
+  return <div className="grid grid-cols-2 gap-3"><div className="rounded-2xl bg-sky/25 p-3"><p className="text-[9px] font-bold uppercase text-berry/45">This month</p><p className="mt-2 font-display text-3xl">£12.8k</p><p className="text-[9px] text-[#5c7e58]">+8.4% collected</p></div><div className="rounded-2xl bg-white p-3 shadow-sm"><p className="text-[9px] font-bold uppercase text-berry/45">Invoices</p><div className="mt-3 space-y-2">{['Paid','Pending','Draft'].map((x,i) => <div key={x} className="flex justify-between text-[9px]"><span>{x}</span><b>{[28,6,3][i]}</b></div>)}</div></div><div className="col-span-2 flex h-12 items-end gap-1 rounded-xl bg-rose/10 px-3 pt-2">{[25,42,38,65,58,80,72,94].map((h,i)=><span key={i} className="flex-1 rounded-t bg-rose/70" style={{height:`${h}%`}} />)}</div></div>;
+}
 
 function FinalCta() {
   return (
-    <section className="section-pad relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,#F8E5D6,transparent_30rem),radial-gradient(circle_at_80%_80%,#E1ECDB,transparent_30rem),linear-gradient(180deg,#FBF3E6,#FFF9F1)]" />
-      <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-        <Eyebrow>Begin here</Eyebrow>
-        <h2 className="mt-5 font-display text-4xl uppercase leading-[1.02] text-berry md:text-6xl">
-          Ready to begin with Rosebery?
-        </h2>
-        <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-berry/70">
-          Register your child, apply as a childminder, or get in touch — we'd love to hear from you.
-        </p>
-        <div className="mt-9 flex flex-col flex-wrap justify-center gap-3 sm:flex-row">
-          <Link to="/register-interest"><Button size="lg">Register Your Child</Button></Link>
-          <Link to="/become-a-childminder"><Button variant="secondary" size="lg">Become a Childminder</Button></Link>
-          <Link to="/contact"><Button variant="outline" size="lg">Contact Us</Button></Link>
-        </div>
+    <section className="sunset-cta relative isolate min-h-[76vh] overflow-hidden py-24 md:py-32">
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,#ffd7c6_0%,#ef9f9e_50%,#9a4164_100%)]" />
+      <div className="absolute bottom-[-10rem] left-1/2 -z-10 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-[#ffe7a7] blur-3xl" />
+      <div className="absolute bottom-0 left-0 right-0 -z-10 h-[32%] bg-gradient-to-t from-berry/55 to-transparent" />
+      <Send className="paper-plane absolute left-[12%] top-[20%] h-10 w-10 -rotate-12 text-white/75" />
+      <Star className="float-star absolute right-[15%] top-[16%] h-8 w-8 fill-[#ffe7a7] text-[#ffe7a7]" />
+      <Sparkles className="float-star absolute bottom-[25%] left-[20%] h-7 w-7 text-white/70" style={{ animationDelay: '1.2s' }} />
 
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-berry/60">
-          <span className="flex items-center gap-2"><Shield className="h-4 w-4 text-[#5C7E58]" /> Liverpool Muslim Society</span>
-          <span className="flex items-center gap-2"><HomeIcon className="h-4 w-4 text-[#5C7E58]" /> Facility-based hub</span>
-          <span className="flex items-center gap-2"><MessageSquare className="h-4 w-4 text-[#5C7E58]" /> Parent enquiry support</span>
+      <div className="mx-auto flex min-h-[52vh] max-w-5xl items-center justify-center px-4 text-center sm:px-6">
+        <div className="liquid-glass rounded-[36px] px-5 py-12 text-white sm:rounded-[48px] sm:px-12 md:px-20 md:py-16">
+          <span className="inline-flex rounded-full border border-white/35 bg-white/15 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em]">Your Rosebery journey starts here</span>
+          <h2 className="mt-6 font-display text-[clamp(3.5rem,9vw,8rem)] uppercase leading-[0.88]">Ready to Begin With Rosebery?</h2>
+          <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-white/80 sm:text-lg">A warm welcome, trusted care and a community that helps every child feel they belong.</p>
+          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
+            <Link to="/register-interest"><Button size="lg" className="w-full bg-white text-berry shadow-2xl hover:bg-cream sm:w-auto">Register Your Child</Button></Link>
+            <Link to="/become-a-childminder"><Button size="lg" variant="secondary" className="liquid-glass w-full border-white/45 bg-white/15 text-white sm:w-auto">Become a Childminder</Button></Link>
+            <Link to="/contact"><Button size="lg" variant="outline" className="w-full border-white/45 text-white hover:bg-white/15 sm:w-auto">Contact Us</Button></Link>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* unused-import shim so tree-shaking doesn't complain in some bundlers */
-export const __icons = { Sparkles, CalendarCheck, CreditCard, Blocks };
+function SectionHeading({ eyebrow, title, copy, align = 'center', inverse = false }: { eyebrow: string; title: string; copy: string; align?: 'left' | 'center'; inverse?: boolean }) {
+  return (
+    <div className={`max-w-4xl ${align === 'center' ? 'mx-auto text-center' : ''}`}>
+      <span className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] ${inverse ? 'border border-white/20 bg-white/10 text-white/75' : 'liquid-glass text-berry/65'}`}><Sparkles className="h-3.5 w-3.5" />{eyebrow}</span>
+      <h2 className={`mt-5 font-display text-[clamp(3rem,6vw,6.5rem)] uppercase leading-[0.9] ${inverse ? 'text-white' : 'text-berry'}`}>{title}</h2>
+      <p className={`mt-5 max-w-2xl text-base leading-7 sm:text-lg ${align === 'center' ? 'mx-auto' : ''} ${inverse ? 'text-white/70' : 'text-berry/65'}`}>{copy}</p>
+    </div>
+  );
+}
