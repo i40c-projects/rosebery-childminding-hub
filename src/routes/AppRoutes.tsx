@@ -14,6 +14,7 @@ import { ContactPage } from '@/pages/public/ContactPage';
 import { LoginPage } from '@/pages/public/LoginPage';
 import { RegisterInterestPage } from '@/pages/public/RegisterInterestPage';
 import { RegistrationPage } from '@/pages/registration/RegistrationPage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
 
 // Owner
 import { OwnerDashboard, OwnerReportsPage, OwnerCompliancePage } from '@/pages/dashboard/owner/OwnerDashboard';
@@ -151,7 +152,7 @@ export function AppRoutes() {
       <Route path="dashboard/parent/documents" element={<ProtectedRoute allowedRoles={['parent']}><ParentDocumentsPage /></ProtectedRoute>} />
 
       <Route path="dashboard" element={<DashboardRedirect />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

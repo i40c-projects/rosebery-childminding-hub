@@ -443,6 +443,43 @@
     filter: drop-shadow(0 10px 12px rgba(122,31,77,0.18));
   }
 
+  .not-found-sky {
+    background:
+      radial-gradient(circle at 76% 22%, rgba(169,216,245,0.44), transparent 24rem),
+      radial-gradient(circle at 16% 78%, rgba(167,199,163,0.34), transparent 25rem),
+      radial-gradient(circle at 58% 92%, rgba(230,90,122,0.16), transparent 22rem),
+      linear-gradient(135deg, #fffaf2 0%, #f6e7d7 48%, #f8d9d8 100%);
+  }
+
+  @keyframes not-found-float {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(-3deg); }
+    50% { transform: translate3d(0, -10px, 0) rotate(4deg); }
+  }
+
+  .not-found-float {
+    animation: not-found-float 6s ease-in-out infinite;
+  }
+
+  @keyframes not-found-cloud {
+    0%, 100% { transform: translateX(0); opacity: 0.72; }
+    50% { transform: translateX(16px); opacity: 0.95; }
+  }
+
+  .not-found-cloud {
+    animation: not-found-cloud 9s ease-in-out infinite;
+    filter: drop-shadow(0 14px 20px rgba(122,31,77,0.08));
+  }
+
+  @keyframes not-found-plane {
+    0%, 100% { transform: translate3d(0, 8px, 0) rotate(-12deg); }
+    50% { transform: translate3d(28px, -12px, 0) rotate(-4deg); }
+  }
+
+  .not-found-plane {
+    animation: not-found-plane 8s ease-in-out infinite;
+    filter: drop-shadow(0 12px 14px rgba(122,31,77,0.14));
+  }
+
   @media (max-width: 1023px) {
     .day-card:nth-child(even),
     .day-card:nth-child(even):hover {
@@ -464,6 +501,12 @@
     .product-card {
       animation: none;
       transition: none;
+    }
+
+    .not-found-float,
+    .not-found-cloud,
+    .not-found-plane {
+      animation: none;
     }
 
     .cinematic-video {
