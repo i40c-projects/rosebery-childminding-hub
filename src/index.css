@@ -106,6 +106,18 @@
     opacity: 0.72;
   }
 
+  .liquid-glass::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.72);
+    border-left: 1px solid rgba(255, 255, 255, 0.34);
+    mask-image: linear-gradient(135deg, #000 0%, transparent 54%);
+  }
+
   .liquid-glass > * {
     position: relative;
     z-index: 1;
@@ -260,11 +272,76 @@
 
   .hero-aurora {
     background:
-      radial-gradient(circle at 73% 23%, rgba(230, 90, 122, 0.30), transparent 25rem),
-      radial-gradient(circle at 88% 68%, rgba(169, 216, 245, 0.42), transparent 28rem),
-      radial-gradient(circle at 42% 88%, rgba(167, 199, 163, 0.32), transparent 25rem),
-      linear-gradient(130deg, #fffaf2 0%, #f7e5d3 50%, #f8d7d7 100%);
+      radial-gradient(circle at 73% 23%, rgba(230, 90, 122, 0.28), transparent 25rem),
+      radial-gradient(circle at 88% 68%, rgba(169, 216, 245, 0.34), transparent 28rem),
+      radial-gradient(circle at 42% 88%, rgba(167, 199, 163, 0.28), transparent 25rem),
+      linear-gradient(100deg, rgba(255,250,242,0.96) 0%, rgba(247,229,211,0.78) 47%, rgba(248,215,215,0.48) 100%);
     animation: aurora-breathe 12s ease-in-out infinite alternate;
+  }
+
+  .cinematic-video {
+    transform: scale(1.04);
+    animation: cinematic-drift 18s ease-in-out infinite alternate;
+  }
+
+  .hero-background-video {
+    opacity: 0.54;
+    filter: saturate(0.72) sepia(0.12) hue-rotate(326deg) brightness(1.12) contrast(0.9);
+  }
+
+  .hero-video-wash {
+    background:
+      linear-gradient(90deg, rgba(255,249,241,0.97) 0%, rgba(255,249,241,0.83) 45%, rgba(255,236,229,0.42) 100%),
+      linear-gradient(180deg, rgba(255,255,255,0.20), rgba(230,90,122,0.12));
+  }
+
+  .atmosphere-video {
+    opacity: 0.28;
+    filter: saturate(0.58) sepia(0.18) hue-rotate(325deg) brightness(1.22) contrast(0.82);
+  }
+
+  .card-background-video {
+    z-index: 1;
+    opacity: 0.48;
+    filter: blur(24px) saturate(0.8) sepia(0.14) hue-rotate(328deg) brightness(1.12) contrast(0.82);
+    transform: scale(1.22);
+    animation-name: cinematic-card-drift;
+    transition: opacity 600ms ease, filter 600ms ease, transform 900ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  .video-card:hover .card-background-video {
+    opacity: 0.58;
+    filter: blur(20px) saturate(0.92) sepia(0.10) hue-rotate(332deg) brightness(1.08) contrast(0.88);
+    transform: scale(1.28);
+  }
+
+  .video-card-wash {
+    z-index: 3;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.12), transparent 40%),
+      linear-gradient(0deg, rgba(74,16,43,0.74), rgba(122,31,77,0.03) 62%);
+  }
+
+  .video-card button,
+  .video-card .liquid-glass {
+    z-index: 4;
+  }
+
+  .final-background-video {
+    opacity: 0.66;
+    filter: saturate(0.75) sepia(0.10) hue-rotate(326deg) brightness(1.04) contrast(0.92);
+  }
+
+  .final-video-wash {
+    background:
+      radial-gradient(circle at 50% 92%, rgba(255,231,167,0.76), transparent 24rem),
+      linear-gradient(180deg, rgba(255,215,198,0.62) 0%, rgba(239,159,158,0.65) 50%, rgba(122,31,77,0.82) 100%);
+  }
+
+  .cinematic-section {
+    box-shadow:
+      0 -1px 0 rgba(255,255,255,0.72),
+      0 36px 90px -48px rgba(122,31,77,0.28);
   }
 
   .classroom-shell {
@@ -333,6 +410,16 @@
     to { filter: saturate(1.12); transform: scale(1.035); }
   }
 
+  @keyframes cinematic-drift {
+    0% { transform: scale(1.04) translate3d(-0.5%, -0.4%, 0); }
+    100% { transform: scale(1.10) translate3d(1%, 0.6%, 0); }
+  }
+
+  @keyframes cinematic-card-drift {
+    0% { transform: scale(1.22) translate3d(-1%, -0.5%, 0); }
+    100% { transform: scale(1.30) translate3d(1%, 0.7%, 0); }
+  }
+
   @keyframes star-float {
     0%, 100% { transform: translateY(0) rotate(-5deg); }
     50% { transform: translateY(-12px) rotate(8deg); }
@@ -377,6 +464,10 @@
     .product-card {
       animation: none;
       transition: none;
+    }
+
+    .cinematic-video {
+      display: none;
     }
   }
 }

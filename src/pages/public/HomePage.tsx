@@ -22,6 +22,15 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
+const cinematicVideos = {
+  hero: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_045634_e1c98c76-1265-4f5c-882a-4276f2080894.mp4',
+  atmosphere: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_151551_992053d1-3d3e-4b8c-abac-45f22158f411.mp4',
+  story: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_053923_22c0a6a5-313c-474c-85ff-3b50d25e944a.mp4',
+  creative: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_054411_511c1b7a-fb2f-42ef-bf6c-32c0b1a06e79.mp4',
+  care: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_055427_ac7035b5-9f3b-4289-86fc-941b2432317d.mp4',
+  final: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_055729_72d66327-b59e-4ae9-bb70-de6ccb5ecdb0.mp4',
+} as const;
+
 const trustPoints = [
   { icon: ShieldCheck, label: 'Safe Spaces' },
   { icon: Users, label: 'Small Groups' },
@@ -40,12 +49,12 @@ const dayStages = [
 ];
 
 const showcaseCards = [
-  { title: 'Story Time', tag: 'Language & wonder', caption: 'Stories that turn a quiet corner into a whole new world.', scene: 'story', tone: 'rose' },
-  { title: 'Creative Learning', tag: 'Make & discover', caption: 'Open-ended materials for little ideas with big potential.', scene: 'creative', tone: 'sky' },
-  { title: 'Healthy Meals', tag: 'Happy routines', caption: 'Colourful, balanced moments shared around the table.', scene: 'meal', tone: 'sage' },
-  { title: 'Small Group Care', tag: 'Known & supported', caption: 'The space and attention every child needs to feel secure.', scene: 'blocks', tone: 'berry' },
-  { title: 'Parent Updates', tag: 'Always connected', caption: 'Meaningful updates that keep families close to the day.', scene: 'updates', tone: 'sun' },
-  { title: 'Quiet Spaces', tag: 'Rest & comfort', caption: 'A softer pace for children who need a peaceful moment.', scene: 'quiet', tone: 'lavender' },
+  { title: 'Story Time', tag: 'Language & wonder', caption: 'Stories that turn a quiet corner into a whole new world.', scene: 'story', tone: 'rose', video: cinematicVideos.story },
+  { title: 'Creative Learning', tag: 'Make & discover', caption: 'Open-ended materials for little ideas with big potential.', scene: 'creative', tone: 'sky', video: cinematicVideos.creative },
+  { title: 'Healthy Meals', tag: 'Happy routines', caption: 'Colourful, balanced moments shared around the table.', scene: 'meal', tone: 'sage', video: cinematicVideos.care },
+  { title: 'Small Group Care', tag: 'Known & supported', caption: 'The space and attention every child needs to feel secure.', scene: 'blocks', tone: 'berry', video: cinematicVideos.story },
+  { title: 'Parent Updates', tag: 'Always connected', caption: 'Meaningful updates that keep families close to the day.', scene: 'updates', tone: 'sun', video: cinematicVideos.creative },
+  { title: 'Quiet Spaces', tag: 'Rest & comfort', caption: 'A softer pace for children who need a peaceful moment.', scene: 'quiet', tone: 'lavender', video: cinematicVideos.care },
 ] as const;
 
 const portalCards = [
@@ -70,6 +79,10 @@ export function HomePage() {
 function Hero() {
   return (
     <section className="hero-stage relative isolate min-h-[calc(100svh-68px)] overflow-hidden">
+      <video className="cinematic-video hero-background-video absolute inset-0 -z-30 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+        <source src={cinematicVideos.hero} type="video/mp4" />
+      </video>
+      <div className="hero-video-wash absolute inset-0 -z-20" />
       <div className="hero-aurora absolute inset-0 -z-20" />
       <div className="absolute left-[5%] top-[12%] -z-10 h-40 w-40 rounded-full bg-rose/15 blur-3xl" />
       <div className="absolute bottom-[8%] right-[42%] -z-10 h-48 w-48 rounded-full bg-sky/25 blur-3xl" />
@@ -226,6 +239,10 @@ function ClassroomScene() {
 function DayAtRosebery() {
   return (
     <section className="day-journey relative isolate overflow-hidden py-24 md:py-32">
+      <video className="cinematic-video atmosphere-video absolute inset-0 -z-20 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+        <source src={cinematicVideos.atmosphere} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(255,249,241,.92),rgba(245,234,220,.86))]" />
       <div className="absolute left-[4%] top-20 h-16 w-28 rounded-full bg-white/65 blur-[1px] before:absolute before:-top-6 before:left-5 before:h-14 before:w-14 before:rounded-full before:bg-white/65 after:absolute after:-top-4 after:right-5 after:h-12 after:w-12 after:rounded-full after:bg-white/65" />
       <div className="absolute right-[8%] top-36 h-12 w-24 rounded-full bg-white/55 before:absolute before:-top-5 before:left-4 before:h-10 before:w-10 before:rounded-full before:bg-white/55" />
       <Send className="paper-plane absolute left-[8%] top-[27%] h-8 w-8 rotate-12 text-rose/70 md:h-11 md:w-11" />
@@ -256,7 +273,7 @@ function DayAtRosebery() {
 
 function InsideRosebery() {
   return (
-    <section className="relative bg-[#f7eadc] py-24 md:py-32">
+    <section className="cinematic-section relative mx-2 overflow-hidden rounded-[38px] bg-[#f7eadc] py-24 md:mx-4 md:rounded-[56px] md:py-32">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading eyebrow="Inside Rosebery" title="See the warmth in every frame" copy="A video-first window into the moments parents care about most." align="left" />
@@ -270,7 +287,10 @@ function InsideRosebery() {
             <article key={card.title} className={`video-card liquid-glass group rounded-[32px] p-2 ${index < 2 ? 'lg:col-span-6' : 'lg:col-span-3'}`}>
               <div className={`relative overflow-hidden rounded-[25px] ${index < 2 ? 'aspect-[16/10]' : 'aspect-[4/5]'}`}>
                 <ShowcaseScene type={card.scene} tone={card.tone} />
-                <div className="absolute inset-0 bg-gradient-to-t from-berry/55 via-transparent to-white/10" />
+                <video className="cinematic-video card-background-video absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+                  <source src={card.video} type="video/mp4" />
+                </video>
+                <div className="video-card-wash absolute inset-0" />
                 <button type="button" aria-label={`Play ${card.title} preview`} className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/65 bg-white/25 text-white shadow-2xl backdrop-blur-xl transition duration-500 group-hover:scale-110 group-hover:bg-white/35">
                   <Play className="ml-1 h-6 w-6 fill-current" />
                 </button>
@@ -294,7 +314,7 @@ function ShowcaseScene({ type, tone }: { type: typeof showcaseCards[number]['sce
     berry: ['#cf8ca8', '#7a1f4d'], sun: ['#f8e1a6', '#eda778'], lavender: ['#e8dff0', '#b8a6ce'],
   }[tone];
   return (
-    <svg viewBox="0 0 600 500" className="h-full w-full scale-[1.02] transition duration-700 group-hover:scale-110" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg viewBox="0 0 600 500" className="relative z-[2] h-full w-full scale-[1.02] opacity-[0.86] transition duration-700 group-hover:scale-105" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs><linearGradient id={`scene-${type}`} x1="0" x2="1" y1="0" y2="1"><stop stopColor={colors[0]} /><stop offset="1" stopColor={colors[1]} /></linearGradient></defs>
       <rect width="600" height="500" fill={`url(#scene-${type})`} />
       <circle cx="500" cy="80" r="120" fill="#fff" opacity=".22" />
@@ -310,7 +330,7 @@ function ShowcaseScene({ type, tone }: { type: typeof showcaseCards[number]['sce
 
 function DigitalHub() {
   return (
-    <section className="digital-hub relative isolate overflow-hidden py-24 text-white md:py-32">
+    <section className="digital-hub cinematic-section relative isolate mx-2 overflow-hidden rounded-[38px] py-24 text-white md:mx-4 md:rounded-[56px] md:py-32">
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(135deg,#7a1f4d_0%,#91355e_42%,#b55d73_100%)]" />
       <div className="absolute -left-20 top-10 -z-10 h-96 w-96 rounded-full bg-rose/30 blur-3xl" />
       <div className="absolute -right-24 bottom-0 -z-10 h-[30rem] w-[30rem] rounded-full bg-sky/20 blur-3xl" />
@@ -356,7 +376,10 @@ function DashboardCanvas({ mode }: { mode: typeof portalCards[number]['mode'] })
 function FinalCta() {
   return (
     <section className="sunset-cta relative isolate min-h-[76vh] overflow-hidden py-24 md:py-32">
-      <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,#ffd7c6_0%,#ef9f9e_50%,#9a4164_100%)]" />
+      <video className="cinematic-video final-background-video absolute inset-0 -z-30 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+        <source src={cinematicVideos.final} type="video/mp4" />
+      </video>
+      <div className="final-video-wash absolute inset-0 -z-20" />
       <div className="absolute bottom-[-10rem] left-1/2 -z-10 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-[#ffe7a7] blur-3xl" />
       <div className="absolute bottom-0 left-0 right-0 -z-10 h-[32%] bg-gradient-to-t from-berry/55 to-transparent" />
       <Send className="paper-plane absolute left-[12%] top-[20%] h-10 w-10 -rotate-12 text-white/75" />
